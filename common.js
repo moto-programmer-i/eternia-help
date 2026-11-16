@@ -24,10 +24,10 @@ async function appendFooter() {
 }
 
 /**
- * h1タグにaタグを挿入
+ * h2タグにaタグを挿入
  */
-async function insertAtoH1() {
-    const h1s = document.getElementsByTagName("h1");
+async function insertAtoH2() {
+    const h1s = document.getElementsByTagName("h2");
     for(let h1 of h1s) {
         const text = h1.textContent;
         h1.textContent = "";
@@ -41,4 +41,4 @@ async function insertAtoH1() {
 
 
 appendFooter();
-insertAtoH1();
+insertAtoH2();
