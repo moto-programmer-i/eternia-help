@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算術勝負（石取りゲーム）</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="common.js" defer></script>
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" defer></script>
+</head>
+<body>
+    <h1>ルール</h1>
+    <ul>
+        <li>石を積んだ山が3つある</li>
+        <li>1つの山から交互に1～3個の石をとる</li>
+        <li>最後の石をとった方の勝ち</li>
+        <li>先攻、後攻はプレイヤーが選べる</li>
+    </ul>
+    <br><hr>
+    <h1>山が1つの場合</h1>
+    まずは山が1つの場合から考える。<br>
+    石が3つ以下の場合は当然、先攻で全ての石を取れば勝ち。<br>
+    <br>
+
+    石が4つの場合、勝敗は以下のようになる。<br><br>
+    <table>
+        <thead>
+            <tr>
+                <td>先攻</td>
+                <td>後攻</td>
+                <td>勝者</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>3</td>
+                <td>後攻</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>後攻</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1</td>
+                <td>後攻</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    つまり<b>相手が何個取っても合わせて4個取ることが可能</b>なので、<br>
+    石の数が4個の場合は後攻が必勝となる。<br>
+    <br>
+    さらに、相手と合わせて常に4個取ることが可能ということは、
+    任意の石の数に\( +4n\)（\(n\)は自然数）をしても勝敗には関係なく、<br>
+    石の数を4で割った余り \(r\) のみを考えればよい。まとめると以下のようになる。<br>
+
+    <br>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <td>\(r\)</td>
+                <td>必勝法</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>\(0\)</td>
+                <td>後攻を選択</td>
+            </tr>
+            <tr>
+                <td>\(\neq 0\)</td>
+                <td>先攻で\(r\)個とる</td>
+            </tr>
+        </tbody>
+    </table>
+    その後、（\(4 - \)相手のとった数）個の石をとっていけば良い。<br>
+    
+    <br><hr>
+
+    <h1>山が3つの場合</h1>
+    3つの山の石の数を4で割った余りを\(r_1, r_2, r_3\)とする。<br>
+    \(r_1, r_2, r_3 = 0\)で後攻なら山が1つの場合と同様に後攻で必勝となるので、それを目指せば良い。<br>
+    （\(r_1, r_2, r_3\)の順番は関係なく、石の数の組み合わせだけが重要）<br>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <td>\(r_1\)</td>
+                <td>\(r_2\)</td>
+                <td>\(r_3\)</td>
+                <td>必勝法</td>
+            </tr>
+        </thead>
+        <tbody class="last-text">
+            <tr>
+                <td>\(0\)</td>
+                <td>\(0\)</td>
+                <td>\(n\)</td>
+                <td>山が1つの場合と同様</td>
+            </tr>
+            <tr>
+                <td>\(0\)</td>
+                <td>\(1\)</td>
+                <td>\(1\)</td>
+                <td>後攻</td>
+            </tr>
+            <tr>
+                <td>\(0\)</td>
+                <td>\(1\)</td>
+                <td>\( \geq 2\)</td>
+                <td>先攻で\(r_3 = 1\)になるようにとる</td>
+            </tr>
+            <tr>
+                <td>\(0\)</td>
+                <td>\(2\)</td>
+                <td>\(2\)</td>
+                <td>後攻※</td>
+            </tr>
+            <tr>
+                <td>\(0\)</td>
+                <td>\(2\)</td>
+                <td>\(3\)</td>
+                <td>先攻で\(r_3 = 2\)になるようにとる</td>
+            </tr>
+            <tr>
+                <td>\(0\)</td>
+                <td>\(3\)</td>
+                <td>\(3\)</td>
+                <td>後攻※</td>
+            </tr>
+            <tr>
+                <td>\(1\)</td>
+                <td>\(1\)</td>
+                <td>\(\geq 1\)</td>
+                <td>先攻で\(r_3 = 0\)になるようにとる</td>
+            </tr>
+            <tr>
+                <td>\(\geq 1\)</td>
+                <td>\(2\)</td>
+                <td>\(2\)</td>
+                <td>先攻で\(r_1 = 0\)になるようにとる</td>
+            </tr>
+            <tr>
+                <td>\(1\)</td>
+                <td>\(2\)</td>
+                <td>\(3\)</td>
+                <td>後攻※</td>
+            </tr>
+            <tr>
+                <td>\(\geq 1\)</td>
+                <td>\(3\)</td>
+                <td>\(3\)</td>
+                <td>先攻で\(r_1 = 0\)になるようにとる</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="right">
+        ※相手がとった後、必ず上記の先攻の行のどれかの状態になる
+    </p>
+    <br>
+    相手が \(r=0\) の山から石をとった場合は、同じ山から（\(4 - \)相手のとった数）個とり、<br>
+    \(r \neq 0\) の山から石をとった場合は、上記の表に従えばよい。
+
+
+    <hr>
+
+    <br><br>
+    このページは、 <a href="https://www.mathjax.org/" target="_blank">MathJax</a>を利用しています。（<a href="https://github.com/mathjax/MathJax-src/blob/master/LICENSE" target="_blank">ライセンス</a>）
+</body>
+</html>

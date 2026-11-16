@@ -1,0 +1,35 @@
+table {
+  border-collapse:  collapse;     /* セルの線を重ねる */
+  border: solid 1px 0px;              /* 枠線指定 */
+  margin-left: auto;
+  margin-right: auto;
+}
+table tbody {
+  border-top: solid 2px;
+}
+
+table tr {
+  border-top: solid 1px;
+}
+
+thead tr td {
+  padding: 0 1em;
+}
+
+td {
+  text-align: center;
+}
+
+footer {
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+}
+
+tbody.last-text tr td:last-child {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
